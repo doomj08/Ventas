@@ -35,9 +35,19 @@ class ProductoController extends Controller
 
     public function comprarSuministros(Request $request){
         foreach ($request->data as $producto){
+
             $auxiliar=Producto::find($producto['id']);
+
+            if($auxiliar){
             $auxiliar->cantidad=$auxiliar->cantidad+$producto['vendido'];
             $auxiliar->save();
+            }else{
+            $nuevo=New Producto();
+            $nuevo->nombre=$producto['nombre'];
+            $nuevo->precio=$producto['precio'];
+            $nuevo->cantidad=$producto['vendido'];
+            $nuevo->save();
+            }
         }
     }
 }

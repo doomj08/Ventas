@@ -83,26 +83,24 @@
             <tr>
                 <td>
                 <label for="">Nombre de producto</label>
-                <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+
                 </td>
                 <td>
                 <label for="">Precio</label>
-                <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+
                 </td>
                 <td>
-                    <button style="width: 50%;" class='btn btn-primary ' v-on:click="nuevoProducto">
-                        Agregar Nuevo Producto
-                    </button>
+
                 </td>
                 </tr>
                 <tr>
                     <td>
-                    <label for="">Nombre de producto</label>
-                    <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+
+                    <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 100%;">
                     </td>
                     <td>
-                        <label for="">Precio</label>
-                        <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+
+                        <input :id="index" type="number" v-model="newPrecio" :value="0" style="width: 100%;">
                     </td>
                     <td>
                         <button style="width: 50%;" class='btn btn-primary ' v-on:click="nuevoProducto">
@@ -131,7 +129,9 @@
                 carrito:[],
                 respuesta:'',
                 contar:[],
-                finalizada:false
+                finalizada:false,
+                newPrecio:0,
+                newNombre:'',
             },
             computed: {
                 filteredPosts () {
@@ -178,7 +178,7 @@
                 },
                 nuevoProducto(){
                     console.log('nuevo producto');
-                    var array = {cantidad:0,nombre:0,precio:0,vendido:0};
+                    var array = {id:0,cantidad:0,nombre:this.newNombre,precio:this.newPrecio,vendido:0};
                     this.productos.push(array);
                 },
 
