@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page_heading','Ventas')
-@section('section')
-    <div id="app">
+
+@section('content')
+    <div id="app2">
         <div class="col-md-6">
             <table class="table table-bordered dataTable">
-                <caption>Carrito de compras</caption>
+                <tr>Lista de suministros</tr>
                 <thead>
                 <tr>
                     <th>Código</th>
@@ -21,24 +21,32 @@
                     <td>@{{ producto.id }}</td>
                     <td>@{{ producto.nombre }}</td>
                     <td>@{{ producto.vendido }}</td>
-                    <td>@{{ producto.precio.precio }}</td>
-                    <td>@{{ producto.precio.precio*producto.vendido }}</td>
+                    <td>@{{ producto.precio }}</td>
+                    <td>@{{ producto.precio*producto.vendido }}</td>
                     <td>
 
-                        <button class='btn btn-md ' style='background-color:transparent;' v-on:click="restatotal( producto.precio.precio*producto.vendido);producto.cantidad += producto.vendido;producto.vendido = 0"  :disabled="producto.vendido<=0">
+                        <button class='btn btn-md '  v-on:click="restatotal( producto.vendido   *producto.precio);producto.vendido = 0"  :disabled="producto.vendido<=0">
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="6">Total a pagar: @{{ total }}</td>
+                    <td colspan="6">Total a pagar: @{{ total }}
+                        <button class='btn btn-md ' style='background-color:transparent;' v-on:click="comprar" :disabled="finalizada" >
+                            Comprar
+                        </button>
+                        </button>
+                        <button class='btn btn-md ' style='background-color:transparent;' :disabled="!finalizada">
+                            <i class="glyphicon glyphicon-shopping-cart" > <a :href="'factura/'+ respuesta">Imprimir factura </a> </i>
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="col-md-6">
-            <table class="table table-bordered dataTable" :disabled="finalizada">
-                <caption>Lista de productos</caption>
+            <table class="table table-bordered dataTable">
+                <tr>Lista de productos</tr>
                 <thead>
                 <tr>
                     <th>Código</th>
@@ -53,14 +61,14 @@
                     <td>@{{ producto.id }}</td>
                     <td>@{{ producto.nombre }}</td>
                     <td>@{{ producto.cantidad }}</td>
-                    <td>@{{ producto.precio.precio }}</td>
+                    <td>@{{ producto.precio }}</td>
 
                     <td>
-                        <input :id="index" type="text" v-model="contar[index]" :value="0" style="width: 30%;">
-                        <button class='btn btn-md ' style='background-color:transparent;' v-on:click="filteredPosts;producto.vendido += contar[index]*1;producto.cantidad -= contar[index]*1;sumatotal( producto.vendido*producto.precio.precio)"  :disabled="producto.cantidad-contar[index]*1<0||!contar[index]">
-                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                        <input :id="index" type="text" v-model="contar[index]" :value="0" style="width: 25%;">
+                        <button style="width: 50%;" class='btn btn-primary ' v-on:click="filteredPosts;producto.vendido += contar[index]*1;sumatotal( producto.vendido*producto.precio)"  :disabled="producto.cantidad-contar[index]*1<0||!contar[index]">
+                            Agregar
                         </button>
-
+                    </td>
 
 
 
@@ -69,18 +77,8 @@
 
             </table>
         </div>
-        <div class="col-md-12">
-            <button class='btn btn-md ' style='background-color:transparent;' v-on:click="comprar" :disabled="finalizada" >
-                <i class="glyphicon glyphicon-shopping-cart">Comprar</i>
-            </button>
-            <button class='btn btn-md ' style='background-color:transparent;' :disabled="!finalizada">
-                <i class="glyphicon glyphicon-shopping-cart" > <a :href="'factura/'+ respuesta">Imprimir factura </a> </i>
-            </button>
-        </div>
 
     </div>
-
-
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.0/vue.js"></script>
@@ -88,7 +86,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginator/2.0.0/vuejs-paginator.js"></script>
     <Script>
         var app = new Vue({
-            el: '#app',
+            el: '#app2',
             data: {
                 csrf:document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
@@ -120,7 +118,7 @@
                     this.carrito=posts
                 },
                 getproductos(){
-                    this.$http.get('lista').then(function(response){
+                    this.$http.get('getproductos').then(function(response){
                         this.productos = response.body;
 
                     }, function(){
@@ -135,7 +133,7 @@
                 },
                 comprar(){
                     this.filteredPosts();
-                    this.$http.post('comprar',{
+                    this.$http.post('comprarSuministros',{
                         _token:this.csrf,data:this.carrito}
                     ).then(function(response){
                         this.respuesta=response.body;
@@ -164,4 +162,4 @@
         })
     </Script>
 
-@stop
+@endsection

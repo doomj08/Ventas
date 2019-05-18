@@ -34,23 +34,10 @@ class ProductoController extends Controller
     }
 
     public function comprarSuministros(Request $request){
-        return response('error',404);
-        $factura=new Factura();
-        $factura->cliente_id=1;
-        $factura->user_id=Auth::id();
-        $factura->save();
-
         foreach ($request->data as $producto){
             $auxiliar=Producto::find($producto['id']);
             $auxiliar->cantidad=$auxiliar->cantidad+$producto['vendido'];
             $auxiliar->save();
-
-            /*$venta=new Venta();
-            $venta->producto_id=$auxiliar->id;
-            $venta->cantidad=$producto['vendido'];
-            $venta->factura_id=$factura->id;
-            $venta->save();*/
         }
-        return response($factura->id,200);
     }
 }

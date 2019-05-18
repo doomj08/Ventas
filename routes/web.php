@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {        //Agrupa a las rutas
     Route::get('getproductos', 'ProductoController@getproductos');
     Route::post('comprarSuministros', 'ProductoController@comprarSuministros');
 
-    Route::post('comprar', 'VentaController@comprar')->middleware('rol:1,0,0');
+    Route::post('comprar', 'VentaController@comprar')->middleware('rol:1');
     Route::get('ventas', 'VentaController@index')->middleware('rol:3,2,1');
     Route::get('factura/{id}', 'VentaController@factura');
 
