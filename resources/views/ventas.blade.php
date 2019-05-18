@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td colspan="6">Total a pagar: @{{ total }}
-                    <button style="width: 50%;" class='btn btn-primary ' :click="comprar" :disabled="finalizada">
+                    <button class='btn btn-md ' style='background-color:transparent;' v-on:click="comprar" :disabled="finalizada" >
                         Comprar
                     </button>
                     </button>
@@ -93,10 +93,10 @@
 
                 productos:[],
                 total:0,
-                carrito:'',
+                carrito:[],
                 respuesta:'',
                 contar:[],
-                finalizada:false,
+                finalizada:false
             },
             computed: {
                 filteredPosts () {
@@ -126,11 +126,10 @@
                     });
                 },
                 sumatotal(parcial){
-                    this.total+=parcial;
+                    this.total=this.total+parcial;
                 },
-
                 restatotal(parcial){
-                    this.total-=parcial;
+                    this.total=this.total-parcial;
                 },
                 comprar(){
                     this.filteredPosts();
@@ -138,9 +137,17 @@
                         _token:this.csrf,data:this.carrito}
                     ).then(function(response){
                         this.respuesta=response.body;
+                        this.finalizada=true;
+                        //console.log(response.body);
                     }).catch((error)=>{
                         this.respuesta=error.body;
                         console.log(error);
+                        swal({
+                            type: 'error',
+                            title: 'ERROR..!',
+                            html: ''+error,
+                            confirmButtonClass : 'btn-success'
+                        })
                     });
                 }
 
@@ -149,7 +156,8 @@
 
             },
             mounted() {
-                this.getproductos(),this.finalizada=false
+                this.getproductos(),
+                    this.filteredPosts ()
             }
         })
     </Script>

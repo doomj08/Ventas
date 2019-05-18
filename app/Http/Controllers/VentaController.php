@@ -21,7 +21,7 @@ class VentaController extends Controller
         $factura->user_id=Auth::id();
         $factura->save();
 
-       /* foreach ($request->data as $producto){
+        foreach ($request->data as $producto){
             $auxiliar=Producto::find($producto['id']);
             $auxiliar->cantidad=$auxiliar->cantidad-$producto['vendido'];
             $auxiliar->save();
@@ -32,7 +32,7 @@ class VentaController extends Controller
             $venta->factura_id=$factura->id;
             $venta->save();
         }
-        return response($factura->id,200);*/
+        return response($factura->id,200);
         }
 
         public function factura($id){
