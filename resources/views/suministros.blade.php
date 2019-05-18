@@ -53,7 +53,9 @@
                     <th>Producto</th>
                     <th>Cantidad disponible</th>
                     <th>Precio por unidad</th>
-                    <th>Agregar a las compras</th>
+                    <th>Agregar a las compras
+                    </th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -75,6 +77,38 @@
                 </tr>
                 </tbody>
 
+
+            </table>
+            <table class="table table-bordered dataTable">
+            <tr>
+                <td>
+                <label for="">Nombre de producto</label>
+                <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+                </td>
+                <td>
+                <label for="">Precio</label>
+                <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+                </td>
+                <td>
+                    <button style="width: 50%;" class='btn btn-primary ' v-on:click="nuevoProducto">
+                        Agregar Nuevo Producto
+                    </button>
+                </td>
+                </tr>
+                <tr>
+                    <label for="">Nombre de producto</label>
+                    <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+                    </td>
+                    <td>
+                        <label for="">Precio</label>
+                        <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
+                    </td>
+                    <td>
+                        <button style="width: 50%;" class='btn btn-primary ' v-on:click="nuevoProducto">
+                            Agregar Nuevo Producto
+                        </button>
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -139,17 +173,13 @@
                         this.respuesta=response.body;
                         this.finalizada=true;
                         //console.log(response.body);
-                    }).catch((error)=>{
-                        this.respuesta=error.body;
-                        console.log(error);
-                        swal({
-                            type: 'error',
-                            title: 'ERROR..!',
-                            html: ''+error,
-                            confirmButtonClass : 'btn-success'
-                        })
                     });
-                }
+                },
+                nuevoProducto(){
+                    console.log('nuevo producto');
+                    var array = {cantidad:0,nombre:0,precio:0,vendido:0};
+                    this.productos.push(array);
+                },
 
 
 

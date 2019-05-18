@@ -14,20 +14,11 @@ class UserTableSeeder extends Seeder
     {
         //
         $user=new User();
-        $user->nombre='Jorge Luis';
-        $user->apellido='Tinjaca Burgos';
-        $user->documento='1118541581';
+        $user->nombre='Juan Pablo';
+        $user->apellido='Pinzón Rivera';
+        $user->documento='1013643876';
         $user->rol_id='1';
-        $user->email='jltinjaca@gmail.com';
-        $user->password=bcrypt('secret');
-        $user->save();
-
-        $user=new User();
-        $user->nombre='Jose';
-        $user->apellido='Toscano';
-        $user->documento='1118541582';
-        $user->rol_id='1';
-        $user->email='jltinjaca@hotmail.com';
+        $user->email='pablo_904@hotmail.es';
         $user->password=bcrypt('secret');
         $user->save();
     }
