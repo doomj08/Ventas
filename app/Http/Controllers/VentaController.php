@@ -36,14 +36,15 @@ class VentaController extends Controller
         }
 
         public function factura($id){
-            $ventas=Venta::where('factura_id',$id)->get();
+        $factura=Factura::find($id);
+        $ventas=Venta::where('factura_id',$id)->get();
             $total=0;
             foreach ($ventas as $venta){
                 $total=$total+$venta->cantidad*$venta->producto->precio;
             }
 //return $ventas;
             $dompdf = new Dompdf();
-            $dompdf->loadHtml(view('factura',compact(['ventas','total','id'])));
+            $dompdf->loadHtml(view('factura',compact(['ventas','total','id','factura'])));
             $dompdf->setPaper('A4', 'landscape');
             $dompdf->render();
             $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));

@@ -112,9 +112,13 @@
             <td class="col-3 li-title">Total: {{$total}}</td>
         </tr>
         <tr>
-            <td>
+            <td>Vendedor:</td>
+            <td>{{$factura->user->nombre}} {{$factura->user->apellido}}</td>
 
-            </td>
+        </tr>
+        <tr>
+            <td>C.C:</td>
+            <td>{{$factura->user->documento}}</td>
         </tr>
         </table>
 
