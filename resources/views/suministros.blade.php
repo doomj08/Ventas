@@ -67,7 +67,7 @@
 
                     <td>
                         <input :id="index" type="text" v-model="contar[index]" :value="0" style="width: 25%;">
-                        <button style="width: 50%;" class='btn btn-primary ' v-on:click="filteredPosts;producto.vendido += contar[index]*1;sumatotal( producto.vendido*producto.precio)"  :disabled="producto.cantidad-contar[index]*1<0||!contar[index]">
+                        <button style="width: 50%;" class='btn btn-primary ' v-on:click="filteredPosts;producto.vendido += contar[index]*1;sumatotal( producto.vendido*producto.precio)"  :disabled="producto.vendido>0||!contar[index]">
                             Agregar
                         </button>
                     </td>
@@ -96,6 +96,7 @@
                 </td>
                 </tr>
                 <tr>
+                    <td>
                     <label for="">Nombre de producto</label>
                     <input :id="index" type="text" v-model="newNombre" :value="0" style="width: 25%;">
                     </td>
