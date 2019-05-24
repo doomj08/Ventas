@@ -3,6 +3,13 @@
     body {font-family: 'Arvo', serif;}
     h1   {color: blue;}
     p    {color: red;}
+
+    .hero-image {
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+
+    }
     .tabla {
         color: #3e4243;
         border-spacing: 0px;
@@ -57,7 +64,11 @@
 <ul class="col-12">
 
     <li>
-
+    <li class="col-3">
+        <img src="images/kwik-e-mart.jpg" alt="" class="hero-image">
+    </li>
+    <li class="col-3"></li>
+    <li class="col-3"></li>
         <li class="col-3">
             <ul class="col-12 titulo-numero">
                 NUMERO DE FACTURA:{{$id}}
