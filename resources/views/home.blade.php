@@ -67,6 +67,11 @@
             <a href="pedidos">Pedidos</a>
             <a href="editarfactura">Modificar factura</a>
         </div>
+        <div class="title m-b-md">
+            <img src="images/kwik-e-mart.jpg" alt="" width="70%">
+        </div>
 
-    </div></div>
+    </div>
+
+</div>
 @endsection

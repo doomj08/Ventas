@@ -1,11 +1,36 @@
 @extends('layouts.app')
 
+@section('estilos')
+    <style>
+        .hero-image {
+            background-image: url("images/mercado.jpg");
+            background-color: #fff;
+            height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        table{
 
+
+        }
+        .hero-text {
+            text-align: center;
+
+            color: black;
+        }
+        .table{
+            background-color: rgba(255, 255, 255, 0.90);
+        }
+
+    </style>
+    @endsection
 @section('content')
-    <div id="app2">
-    <div class="col-md-6">
+    <div id="app2" class="hero-image">
+    <div class="col-md-6 hero-text" >
         <table class="table table-bordered dataTable">
-            <tr>Carrito de compras</tr>
+            <h4 class="table">Carrito de compras</h4>
             <thead>
             <tr>
                 <th>Código</th>
@@ -44,10 +69,12 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 hero-text">
+
         <table class="table table-bordered dataTable">
-            <tr>Lista de productos</tr>
+            <h4 class="table">Lista de productos</h4>
             <thead>
+
             <tr>
                 <th>Código</th>
                 <th>Producto</th>
